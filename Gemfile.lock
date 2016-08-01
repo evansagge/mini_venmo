@@ -2,11 +2,18 @@ PATH
   remote: .
   specs:
     mini_venmo (0.1.0)
+      highline
+      inflections (~> 4.1)
       methadone (~> 1.9.2)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (5.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
     aruba (0.14.1)
       childprocess (~> 0.5.6)
       contracts (~> 0.9)
@@ -19,6 +26,7 @@ GEM
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
+    concurrent-ruby (1.0.2)
     contracts (0.14.0)
     cucumber (2.4.0)
       builder (>= 2.1.2)
@@ -57,6 +65,10 @@ GEM
     guard-rubocop (1.2.0)
       guard (~> 2.0)
       rubocop (~> 0.20)
+    highline (1.7.8)
+    i18n (0.7.0)
+    inflections (4.1.0)
+      activesupport (>= 4.0.0)
     json (1.8.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -66,6 +78,7 @@ GEM
     methadone (1.9.2)
       bundler
     method_source (0.8.2)
+    minitest (5.9.0)
     multi_json (1.12.1)
     multi_test (0.1.2)
     nenv (0.3.0)
@@ -115,6 +128,9 @@ GEM
     simplecov-html (0.10.0)
     slop (3.6.0)
     thor (0.19.1)
+    thread_safe (0.3.5)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
     unicode-display_width (1.1.0)
 
 PLATFORMS

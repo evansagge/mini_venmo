@@ -41,57 +41,58 @@ Feature: Mini-Venmo
     * Credit card numbers will always be numeric.
     * Amounts will be prefixed with "$" and will be dollars and cents
 
-  Scenario: The program is ran interactively
-    When I run `mini_venmo` interactively
-    And I type "user Thomas"
-    And I type "user Lisa"
-    And I type "user"
-    Then the output should contain "ERROR: invalid arguments"
-    And I type "foobar"
-    Then the output should contain "ERROR: command not recognized"
-    And I type "user Quincy"
-    And I type "add Thomas 4111111111111111"
-    And I type "add Thomas 5454545454545454"
-    Then the output should contain "ERROR: this user already has a valid credit card"
-    And I type "add Lisa 5454545454545454"
-    And I type "add Quincy 1234567890123456"
-    Then the output should contain "ERROR: this card is invalid"
-    And I type "pay Thomas Lisa $10.25 burritos"
-    And I type "pay Thomas Quincy $10.00 you're awesome"
-    And I type "pay Lisa Quincy $5.00 pot-luck supplies"
-    And I type "pay Thomas Thomas $1.00 to myself"
-    Then the output should contain "ERROR: users cannot pay themselves"
-    And I type "pay Quincy Thomas $2.00 a subway card"
-    Then the output should contain "ERROR: this user does not have a credit card"
-    And I type "add Quincy 5454545454545454"
-    Then the output should contain "ERROR: that card has already been added by another user, reported for fraud!"
-    And I type "add Quincy 5555555555554444"
-    And I type "pay Quincy Thomas $14.50 a redbull vodka"
-    And I type "feed Quincy"
-    Then the output should contain:
-      """
-      -- Thomas paid you $10.00 for you're awesome
-      -- Lisa paid you $5.00 for pot-luck supplies
-      -- You paid Thomas $14.50 for a redbull vodka
-      """
-    And I type "balance Quincy"
-    Then the output should contain:
-      """
-      -- $15.00
-      """
-    And I type "feed Thomas"
-    Then the output should contain:
-      """
-      -- You paid Lisa $10.25 for burritos
-      -- You paid Quincy $10.00 for you're awesome
-      -- Quincy paid you $14.50 for a redbull vodka
-      """
-    And I type "feed Lisa"
-    Then the output should contain:
-      """
-      -- Thomas paid you $10.25 for burritos
-      -- You paid Quincy $5.00 for pot-luck supplies
-      """
+#  Scenario: The program is ran interactively
+#    When I run `mini_venmo` interactively
+#    And I type "user Thomas"
+#    And I type "user Lisa"
+#    And I type "user"
+#    Then the output should contain "ERROR: invalid arguments"
+#    Then I type "foobar"
+#    Then the output should contain "ERROR: command not recognized"
+#    When I type "user Quincy"
+#    And I type "add Thomas 4111111111111111"
+#    And I type "add Thomas 5454545454545454"
+#    Then the output should contain "ERROR: this user already has a valid credit card"
+#    When I type "add Lisa 5454545454545454"
+#    And I type "add Quincy 1234567890123456"
+#    Then the output should contain "ERROR: this card is invalid"
+#    When I type "pay Thomas Lisa $10.25 burritos"
+#    And I type "pay Thomas Quincy $10.00 you're awesome"
+#    And I type "pay Lisa Quincy $5.00 pot-luck supplies"
+#    And I type "pay Thomas Thomas $1.00 to myself"
+#    Then the output should contain "ERROR: users cannot pay themselves"
+#    When I type "pay Quincy Thomas $2.00 a subway card"
+#    Then the output should contain "ERROR: this user does not have a credit card"
+#    When I type "add Quincy 5454545454545454"
+#    Then the output should contain "ERROR: that card has already been added by another user, reported for fraud!"
+#    And I type "add Quincy 5555555555554444"
+#    And I type "pay Quincy Thomas $14.50 a redbull vodka"
+#    And I type "feed Quincy"
+#    Then the output should contain:
+#      """
+#      -- Thomas paid you $10.00 for you're awesome
+#      -- Lisa paid you $5.00 for pot-luck supplies
+#      -- You paid Thomas $14.50 for a redbull vodka
+#      """
+#    And I type "balance Quincy"
+#    Then the output should contain:
+#      """
+#      -- $15.00
+#      """
+#    And I type "feed Thomas"
+#    Then the output should contain:
+#      """
+#      -- You paid Lisa $10.25 for burritos
+#      -- You paid Quincy $10.00 for you're awesome
+#      -- Quincy paid you $14.50 for a redbull vodka
+#      """
+#    And I type "feed Lisa"
+#    Then the output should contain:
+#      """
+#      -- Thomas paid you $10.25 for burritos
+#      -- You paid Quincy $5.00 for pot-luck supplies
+#      """
+#    Then I type "exit"
 
   Scenario: The program is ran with a path to a file as an argument
     Given a file named "transactions.txt" with:

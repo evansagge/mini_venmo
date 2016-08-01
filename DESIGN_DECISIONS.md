@@ -35,4 +35,4 @@
   To clearly understand the code and to maintain good quality, both unit and integration test would be good to have.
   Using Rspec for unit tests and Cucumber for integration tests would be necessary for this.
 
-
+  To make the process easier, integration tests are written first and made to pass as I write the implementation.
