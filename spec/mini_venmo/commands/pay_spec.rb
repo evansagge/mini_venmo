@@ -9,10 +9,10 @@ RSpec.describe MiniVenmo::Commands::Pay do
   let(:note) { 'burritos' }
 
   before do
-    MiniVenmo::Commands::User.new('Thomas').run
-    MiniVenmo::Commands::Add.new('Thomas', '4111111111111111').run
-    MiniVenmo::Commands::User.new('Lisa').run
-    MiniVenmo::Commands::Add.new('Lisa', '5454545454545454').run
+    MiniVenmo::Command.new('user Thomas').run
+    MiniVenmo::Command.new('add Thomas 4111111111111111').run
+    MiniVenmo::Command.new('user Lisa').run
+    MiniVenmo::Command.new('add Lisa 5454545454545454').run
   end
 
   describe '#run' do

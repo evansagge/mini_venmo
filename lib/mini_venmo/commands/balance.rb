@@ -8,6 +8,7 @@ module MiniVenmo
       end
 
       def run
+        validate!
         puts "-- #{format('$%.2f', user.balance)}"
       end
 
@@ -15,6 +16,14 @@ module MiniVenmo
 
       def user
         @user ||= MiniVenmo::Store.users[name]
+      end
+
+      def validate!
+        validate_user!
+      end
+
+      def validate_user!
+        raise Error.new('invalid arguments') if user.nil?
       end
     end
   end
