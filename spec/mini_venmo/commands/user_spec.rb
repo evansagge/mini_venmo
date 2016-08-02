@@ -18,7 +18,7 @@ RSpec.describe MiniVenmo::Commands::User do
         let(:name) { '!invalidname123' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
 
@@ -26,7 +26,7 @@ RSpec.describe MiniVenmo::Commands::User do
         let(:name) { 'Joe' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
 
@@ -34,7 +34,7 @@ RSpec.describe MiniVenmo::Commands::User do
         let(:name) { 'Evan Vidal Sagge' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
     end

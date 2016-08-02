@@ -4,11 +4,11 @@ module MiniVenmo
       VALID_AMOUNT_FORMAT = /^\$\d+.\d{2}$/
       attr_reader :actor_name, :target_name, :amount, :note
 
-      def initialize(actor_name, target_name, amount, note)
+      def initialize(actor_name, target_name, amount, *note)
         @actor_name = actor_name
         @target_name = target_name
         @amount = amount
-        @note = note
+        @note = note.join(' ')
       end
 
       def run
@@ -42,15 +42,15 @@ module MiniVenmo
       end
 
       def validate_actor!
-        raise Error.new('invalid argument') if actor.nil?
+        raise Error.new('invalid arguments') if actor.nil?
       end
 
       def validate_target!
-        raise Error.new('invalid argument') if target.nil?
+        raise Error.new('invalid arguments') if target.nil?
       end
 
       def validate_amount!
-        raise Error.new('invalid argument') unless amount =~ VALID_AMOUNT_FORMAT
+        raise Error.new('invalid arguments') unless amount =~ VALID_AMOUNT_FORMAT
       end
 
       def validate_distinct_actor_and_target!

@@ -8,7 +8,7 @@ module MiniVenmo
       end
 
       def run
-        puts user.balance
+        puts "-- #{format('$%.2f', user.balance)}"
       end
 
       private

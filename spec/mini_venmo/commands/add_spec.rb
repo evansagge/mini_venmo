@@ -25,7 +25,7 @@ RSpec.describe MiniVenmo::Commands::Add do
         let(:name) { 'Lisa' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
 

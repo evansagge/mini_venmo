@@ -1,3 +1,3 @@
 Aruba.configure do |config|
-  puts %(The default value is "#{config.exit_timeout}")
+  config.io_wait_timeout = 5
 end

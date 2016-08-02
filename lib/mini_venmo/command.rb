@@ -30,7 +30,7 @@ module MiniVenmo
     def command_for(command_name, *args)
       command_class(command_name).new(*args)
     rescue ArgumentError
-      raise Error.new('invalid argument')
+      raise Error.new('invalid arguments')
     end
 
     def command_class(command_name)

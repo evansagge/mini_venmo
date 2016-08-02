@@ -23,11 +23,11 @@ module MiniVenmo
       end
 
       def validate_name_format!
-        raise Error.new('invalid argument') unless name =~ VALID_NAME_FORMAT
+        raise Error.new('invalid arguments') unless name =~ VALID_NAME_FORMAT
       end
 
       def validate_name_length!
-        raise Error.new('invalid argument') unless VALID_NAME_LENGTH_RANGE.cover?(name.length)
+        raise Error.new('invalid arguments') unless VALID_NAME_LENGTH_RANGE.cover?(name.length)
       end
     end
   end

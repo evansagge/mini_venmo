@@ -31,7 +31,7 @@ module MiniVenmo
       end
 
       def validate_user!
-        raise Error.new('invalid argument') if user.nil?
+        raise Error.new('invalid arguments') if user.nil?
       end
 
       def validate_user_credit_card!

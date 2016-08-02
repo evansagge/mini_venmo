@@ -42,7 +42,7 @@ RSpec.describe MiniVenmo::Commands::Pay do
         let(:actor_name) { 'Quincy' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
 
@@ -50,7 +50,7 @@ RSpec.describe MiniVenmo::Commands::Pay do
         let(:target_name) { 'Quincy' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
 
@@ -58,7 +58,7 @@ RSpec.describe MiniVenmo::Commands::Pay do
         let(:amount) { '1.25' }
 
         specify do
-          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+          expect { subject }.to raise_error(MiniVenmo::Error, 'invalid arguments')
         end
       end
 
