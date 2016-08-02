@@ -1,28 +1,76 @@
 # MiniVenmo
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mini_venmo`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is the Venmo Challenge.
 
-TODO: Delete this and the text above, and describe your gem
+## Requirements
+
+Ruby 2.3.1
+Bundler 1.12.5
 
 ## Installation
 
-Add this line to your application's Gemfile:
+1. Run `bin/setup` to do all the bundler installation
+2. Run `bin/mini_venmo`
 
-```ruby
-gem 'mini_venmo'
-```
+You can also choose to build the executable for this and install it in your executable path:
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mini_venmo
+1. Run `bin/setup` to do all the bundler installation
+2. Run `bundle exec rake build install`
+3. If you are on `rbenv`, you may need to run `rbenv rehash`.
+4. Run `mini_venmo`
 
 ## Usage
 
-TODO: Write usage instructions here
+The program supports 2 modes of execution:
+* interactively (from stdin), when run with no arguments
+* from a file of newline-delimited commands, when provided with one argument
+
+###Running interactively:
+
+The following commands are supported:
+
+* `user` will create a new user with a given name.
+  * syntax: `user <user>`
+  * User names should be alphanumeric but also allow underscores and dashes.
+  * User names should be no shorter than 4 characters but no longer than 15.
+  * Users start with a balance of $0.
+
+* `add` will create a new credit card for a given name, card number
+  * syntax: `add <user> <card_number>`
+  * Card numbers should be validated using Luhn-10.
+  * Cards that fail Luhn-10 will display an error message.
+  * Cards that have already been added will display an error message.
+  * Users can only have one card. Attempting to add a second valid card will display an error message.
+
+* `pay` will create a payment between two users.
+  * syntax: `pay <actor> <target> <amount> <note>`
+  * `<actor>` and `<target>` are usernames that were created in #1
+  * Users cannot pay themselves.
+  * Payments will always charge the actor's credit card (not decrement their balance).
+  * Payments will always increase the target's balance.
+  * If the actor user has no credit card, an error message will be printed out.
+  * Amount will be prefixed with "$" and will be dollars and cents
+
+* `feed` will display a feed of the respective user's payments.
+  * syntax: `feed <user>`
+
+* `balance` will display a user's balance
+  * syntax: `balance <user>`
+
+* `exit` will close the program
+
+### Running with a file path as an arguments
+
+Run `mini_venmo <path_to_file>` to load a file that contains any of the commands above. Each line in the file will be processed
+sequentially
+
+## Testing
+
+Run `bundle exec rspec` to run the unit tests.
+
+Run `bundle exec cucumber` to run the feature/integration tests.
+
+Each of these test suites will output code coverage in `coverage/index.html`
 
 ## Design Decisions
 
