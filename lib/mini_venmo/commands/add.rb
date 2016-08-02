@@ -1,5 +1,3 @@
-require 'mini_venmo/models/user'
-
 module MiniVenmo
   class Commands
     class Add
@@ -11,13 +9,13 @@ module MiniVenmo
       end
 
       def run
-        user.credit_card = CreditCard.new(card_number)
+        user.credit_card = MiniVenmo::Models::CreditCard.new(card_number)
       end
 
       private
 
       def user
-        @user ||= MiniVenmo::Models::User.find(name)
+        @user ||= MiniVenmo::Models::User.records[name]
       end
     end
   end

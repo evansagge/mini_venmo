@@ -1,9 +1,11 @@
 module MiniVenmo
   module Models
-    User = Struct.new(:name, :credit_card, :payments, :balance) do
+    Payment = Struct.new(:actor, :target, :amount, :note) do
       class << self
         attr_accessor :records
       end
+
+      self.records = {}
 
       def initialize(*)
         super

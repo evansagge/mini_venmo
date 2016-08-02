@@ -1,5 +1,3 @@
-require 'mini_venmo/models/user'
-
 module MiniVenmo
   class Commands
     class Pay
@@ -13,17 +11,19 @@ module MiniVenmo
       end
 
       def run
-        # TODO: create payment between two users
+        payment = MiniVenmo::Models::Payment.new(actor, target, amount, note)
+        actor.payments << payment
+        target.payments << payment
       end
 
       private
 
       def actor
-        @actor ||= MiniVenmo::Models::User.find(actor_name)
+        @actor ||= MiniVenmo::Models::User.records[actor_name]
       end
 
       def target
-        @target ||= MiniVenmo::Models::User.find(target_name)
+        @target ||= MiniVenmo::Models::User.records[target_name]
       end
     end
   end

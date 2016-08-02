@@ -1,5 +1,3 @@
-require 'mini_venmo/models/user'
-
 module MiniVenmo
   class Commands
     class User
@@ -10,7 +8,15 @@ module MiniVenmo
       end
 
       def run
-        MiniVenmo::Models::User.create(name)
+        validate!
+        MiniVenmo::Models::User.records[name] = MiniVenmo::Models::User.new(name)
+      end
+
+      private
+
+      def validate!
+        raise Errors::InvalidArgumentError unless name =~ /^[\w\d\-]+$/
+        raise Errors::InvalidArgumentError unless (4..15).cover?(name.length)
       end
     end
   end

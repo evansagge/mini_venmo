@@ -1,8 +1,6 @@
-require 'mini_venmo/models/user'
-
 module MiniVenmo
   class Commands
-    class User
+    class Feed
       attr_reader :name
 
       def initialize(name)
@@ -16,7 +14,7 @@ module MiniVenmo
       private
 
       def user
-        @user ||= MiniVenmo::Models::User.find(name)
+        @user ||= MiniVenmo::Models::User.records[name]
       end
     end
   end
