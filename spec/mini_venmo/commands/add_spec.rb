@@ -21,11 +21,19 @@ RSpec.describe MiniVenmo::Commands::Add do
     end
 
     context 'validations' do
-      context 'if name has not been created via the "user" command' do
+      context 'if user with name does not exist' do
         let(:name) { 'Lisa' }
 
         specify do
           expect { subject }.to raise_error(MiniVenmo::Error, 'invalid argument')
+        end
+      end
+
+      context 'if card number has non-numeric characters' do
+        let(:card_number) { 'abcdefg1234567890123456' }
+
+        specify do
+          expect { subject }.to raise_error(MiniVenmo::Error, 'this card is invalid')
         end
       end
 

@@ -26,10 +26,14 @@ class Luhn
   end
 
   def valid?
-    valid_number? && luhn_modulo.zero?
+    valid_string? && valid_number? && luhn_modulo.zero?
   end
 
   private
+
+  def valid_string?
+    (value =~ /\D/).nil?
+  end
 
   def valid_number?
     digits.any?

@@ -1,16 +1,8 @@
 module MiniVenmo
   module Models
     Payment = Struct.new(:actor, :target, :amount, :note) do
-      class << self
-        attr_accessor :records
-      end
-
-      self.records = {}
-
-      def initialize(*)
-        super
-        self.balance = 0.00
-        self.payments = []
+      def numeric_amount
+        amount.delete('$').to_f
       end
     end
   end

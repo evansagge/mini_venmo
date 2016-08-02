@@ -1,6 +1,9 @@
 module MiniVenmo
   class Commands
     class User
+      VALID_NAME_FORMAT = /^[\w\d\-]+$/
+      VALID_NAME_LENGTH_RANGE = 4..15
+
       attr_reader :name
 
       def initialize(name)
@@ -15,8 +18,16 @@ module MiniVenmo
       private
 
       def validate!
-        raise Error.new('invalid argument') unless name =~ /^[\w\d\-]+$/
-        raise Error.new('invalid argument') unless (4..15).cover?(name.length)
+        validate_name_format!
+        validate_name_length!
+      end
+
+      def validate_name_format!
+        raise Error.new('invalid argument') unless name =~ VALID_NAME_FORMAT
+      end
+
+      def validate_name_length!
+        raise Error.new('invalid argument') unless VALID_NAME_LENGTH_RANGE.cover?(name.length)
       end
     end
   end

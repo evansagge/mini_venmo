@@ -24,22 +24,27 @@ module MiniVenmo
       end
 
       def validate!
+        validate_user!
+        validate_user_credit_card!
+        validate_unique_credit_card!
+        validate_credit_card!
+      end
+
+      def validate_user!
         raise Error.new('invalid argument') if user.nil?
-        raise Error.new('this user already has a valid credit card') if user_has_valid_credit_card?
-        raise Error.new('that card has already been added by another user, reported for fraud!') if card_added_by_another_user?
-        raise Error.new('this card is invalid') if invalid_card?
       end
 
-      def user_has_valid_credit_card?
-        !user.credit_card.nil?
+      def validate_user_credit_card!
+        raise Error.new('this user already has a valid credit card') unless user.credit_card.nil?
       end
 
-      def card_added_by_another_user?
-        !MiniVenmo::Store.credit_cards[card_number].nil?
+      def validate_unique_credit_card!
+        return if MiniVenmo::Store.credit_cards[card_number].nil?
+        raise Error.new('that card has already been added by another user, reported for fraud!')
       end
 
-      def invalid_card?
-        !Luhn.valid?(card_number)
+      def validate_credit_card!
+        raise Error.new('this card is invalid') unless Luhn.valid?(card_number)
       end
     end
   end
