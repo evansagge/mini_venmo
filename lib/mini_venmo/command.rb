@@ -22,9 +22,10 @@ module MiniVenmo
       command_name, *args = input.split(/\s/).map(&:strip)
 
       command = command_for(command_name, *args)
-      command.run
+      output = command.run
+      puts(output) if output
     rescue Error => error
-      puts "ERROR: #{error.message}"
+      puts("ERROR: #{error.message}")
     end
 
     private

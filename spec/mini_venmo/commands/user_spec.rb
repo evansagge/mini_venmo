@@ -5,12 +5,20 @@ RSpec.describe MiniVenmo::Commands::User do
 
   let(:name) { 'Thomas' }
 
+  around do |example|
+    silence_output { example.run }
+  end
+
   describe '#run' do
     subject { instance.run }
 
     it 'creates a new User with a balance of $0' do
       expect { subject }.to change { MiniVenmo::Store.users }.from({}).to('Thomas' => MiniVenmo::Models::User.new('Thomas'))
       expect(MiniVenmo::Store.users['Thomas'].balance).to eq(0.00)
+    end
+
+    it 'returns nil' do
+      expect(subject).to be_nil
     end
 
     context 'validations' do

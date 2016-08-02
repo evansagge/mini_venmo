@@ -8,6 +8,10 @@ RSpec.describe MiniVenmo::Commands::Pay do
   let(:amount) { '$10.25' }
   let(:note) { 'burritos' }
 
+  around do |example|
+    silence_output { example.run }
+  end
+
   before do
     MiniVenmo::Command.new('user Thomas').run
     MiniVenmo::Command.new('add Thomas 4111111111111111').run
@@ -35,6 +39,10 @@ RSpec.describe MiniVenmo::Commands::Pay do
 
     it "does not decrease the actor's balance (credit card is charged instead)" do
       expect { subject }.not_to change { MiniVenmo::Store.users[actor_name].balance }
+    end
+
+    it 'returns nil' do
+      expect(subject).to be_nil
     end
 
     context 'validations' do

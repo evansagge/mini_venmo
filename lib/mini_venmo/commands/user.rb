@@ -13,6 +13,7 @@ module MiniVenmo
       def run
         validate!
         MiniVenmo::Store.users[name] = MiniVenmo::Models::User.new(name)
+        nil
       end
 
       private

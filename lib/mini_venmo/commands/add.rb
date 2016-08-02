@@ -15,6 +15,7 @@ module MiniVenmo
         new_credit_card = MiniVenmo::Models::CreditCard.new(card_number, user)
         MiniVenmo::Store.credit_cards[card_number] = new_credit_card
         user.credit_card = new_credit_card
+        nil
       end
 
       private

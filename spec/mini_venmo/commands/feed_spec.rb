@@ -5,6 +5,10 @@ RSpec.describe MiniVenmo::Commands::Feed do
 
   let(:name) { 'Thomas' }
 
+  around do |example|
+    silence_output { example.run }
+  end
+
   before do
     MiniVenmo::Command.new('user Thomas').run
     MiniVenmo::Command.new('user Lisa').run
@@ -20,7 +24,7 @@ RSpec.describe MiniVenmo::Commands::Feed do
   describe '#run' do
     subject { instance.run }
 
-    it 'displays a feed of the payments involving the user' do
+    it 'returns a feed of the payments involving the user' do
       feed = <<-FEED
       -- You paid Lisa $10.25 for burritos
       -- You paid Quincy $10.00 for you're awesome
@@ -28,7 +32,7 @@ RSpec.describe MiniVenmo::Commands::Feed do
       -- Quincy paid you $14.50 for a redbull vodka
       FEED
       feed.gsub!(/^#{feed.scan(/^[ \t]*(?=\S)/).min}/, '') # strip_heredoc
-      expect { subject }.to output(feed).to_stdout
+      expect(subject).to eq(feed.chomp)
     end
 
     context 'validations' do

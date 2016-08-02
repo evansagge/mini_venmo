@@ -27,8 +27,27 @@
 3. Separation of Concerns
 
   I believe projects are better when there's a proper separation between the application framework and the business logic.
-  To this effect, I prefer to write service objects to encapsulate the business logic for this project, and invoke them
-  from the framework.
+  To this effect, I prefer to write service objects to encapsulate the business logic for this project, and invoke them from the framework.
+
+  Each command (user, add, pay, feed, balance) is represented as service classes in MiniVemo::Commands, and each contain the raw
+  actions that they represent. Validations are also included in these service classes (rather than in the models) as
+  these are where they are invoked, thus making these service classes act as form classes as well.
+
+  Models for User, CreditCard and Payment are basically Struct object to allow for specifying simple attribute accessors. Other than
+  a few decorating methods, there's not a lot of logic here as they're there to represent state and not include behavior (behaviors are
+  specified in the service classes).
+
+  For data store, there's MiniVenmo::Store which includes Hash objects for created Users and CreditCards, so they're stored in memory.
+  This means that state will not be persisted after exiting the application. The use of Hash objects was a good decision as it gives
+  us simple lookup tables that we can use to find a User with a given name or a CreditCard with a given number.
+
+  Note that there's no storage needed for Payment objects, as we don't do lookups from the top-level namespace. Rather, we associate
+  Payment objects to their respective actor and target User objects so we can easily fetch them from the Feed command.
+
+  The use of a base MiniVenmo::Error class is excellent for distinguishing between exceptions caused by business logic errors and
+  framework/syntax errors. We throw MiniVenmo::Error from the MiniVenmo::Commands classes, and let the MiniVenmo::Command handle
+  them, in this case printing them to the STDOUT. We also let MiniVenmo::Command print the result of MiniVenmo::Commands into STDOUT
+  if the result is not nil, thus centralizing all STDOUT streams in MiniVenmo::Command.
 
 4. Testing
 

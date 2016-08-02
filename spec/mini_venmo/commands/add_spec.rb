@@ -11,6 +11,10 @@ RSpec.describe MiniVenmo::Commands::Add do
 
     subject { instance.run }
 
+    around do |example|
+      silence_output { example.run }
+    end
+
     before do
       MiniVenmo::Command.new('user Thomas').run
     end
@@ -18,6 +22,10 @@ RSpec.describe MiniVenmo::Commands::Add do
     it 'adds a credit card with the given number to the user' do
       expect { subject }.to change { MiniVenmo::Store.users['Thomas'].credit_card }.from(nil).to(instance_of(MiniVenmo::Models::CreditCard))
       expect(MiniVenmo::Store.users['Thomas'].credit_card.number).to eq('4111111111111111')
+    end
+
+    it 'returns nil' do
+      expect(subject).to be_nil
     end
 
     context 'validations' do

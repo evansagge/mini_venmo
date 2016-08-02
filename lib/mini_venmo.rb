@@ -10,6 +10,8 @@ module MiniVenmo
   def self.run_file(path)
     Store.initialize
     File.foreach(path) do |line|
+      line.chomp!
+      next if line.empty?
       puts "> #{line}"
       Command.run(line)
     end
@@ -20,6 +22,7 @@ module MiniVenmo
     cli = HighLine.new
     loop do
       input = cli.ask '> '
+      input.chomp!
       break if input.empty? || input == 'exit'
       Command.run(input)
     end

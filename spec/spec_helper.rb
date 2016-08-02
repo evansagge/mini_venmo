@@ -3,6 +3,28 @@ require 'methadone'
 require 'mini_venmo'
 require 'pry'
 
+# RSpec.configure do |config|
+#   config.before(:all, &:silence_output)
+#   config.after(:all, &:enable_output)
+# end
+
+# Redirects stderr and stdout to /dev/null.
+def silence_output
+  @orig_stderr = $stderr
+  @orig_stdout = $stdout
+
+  # redirect stderr and stdout to /dev/null
+  $stderr = File.new('/dev/null', 'w')
+  $stdout = File.new('/dev/null', 'w')
+
+  yield
+
+  $stderr = @orig_stderr
+  $stdout = @orig_stdout
+  @orig_stderr = nil
+  @orig_stdout = nil
+end
+
 RSpec.configure do |config|
   config.before do
     MiniVenmo::Store.initialize

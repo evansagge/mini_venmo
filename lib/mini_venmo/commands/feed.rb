@@ -9,9 +9,9 @@ module MiniVenmo
 
       def run
         validate!
-        user.payments.each do |payment|
-          puts "-- #{compose_payment_message(payment)}"
-        end
+        user.payments.map do |payment|
+          "-- #{compose_payment_message(payment)}"
+        end.join("\n")
       end
 
       private

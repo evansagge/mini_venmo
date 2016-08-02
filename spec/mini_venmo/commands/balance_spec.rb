@@ -12,8 +12,8 @@ RSpec.describe MiniVenmo::Commands::Balance do
   describe '#run' do
     subject { instance.run }
 
-    it 'displays a the balance for the given user name' do
-      expect { subject }.to output("-- $12.50\n").to_stdout
+    it 'returns the balance for the given user name' do
+      expect(subject).to eq("-- $12.50")
     end
 
     context 'validations' do

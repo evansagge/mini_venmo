@@ -17,6 +17,7 @@ module MiniVenmo
         actor.payments << payment
         target.payments << payment
         target.balance += payment.numeric_amount
+        nil
       end
 
       private

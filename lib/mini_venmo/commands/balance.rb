@@ -9,7 +9,7 @@ module MiniVenmo
 
       def run
         validate!
-        puts "-- #{format('$%.2f', user.balance)}"
+        "-- #{format('$%.2f', user.balance)}"
       end
 
       private
