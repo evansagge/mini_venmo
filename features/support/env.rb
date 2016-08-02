@@ -1,3 +1,4 @@
+require 'simplecov'
 require 'aruba/cucumber'
 require 'methadone/cucumber'
 

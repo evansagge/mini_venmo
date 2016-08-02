@@ -27,6 +27,8 @@ module MiniVenmo
       puts "ERROR: #{error.message}"
     end
 
+    private
+
     def command_for(command_name, *args)
       command_class(command_name).new(*args)
     rescue ArgumentError
