@@ -1,5 +1,5 @@
 require 'active_support/core_ext/string/inflections'
-require 'mini_venmo/errors'
+require 'mini_venmo/error'
 require 'mini_venmo/commands/user'
 require 'mini_venmo/commands/add'
 require 'mini_venmo/commands/pay'
@@ -23,20 +23,20 @@ module MiniVenmo
 
       command = command_for(command_name, *args)
       command.run
-    rescue Errors::Error => error
+    rescue Error => error
       puts "ERROR: #{error.message}"
     end
 
     def command_for(command_name, *args)
       command_class(command_name).new(*args)
     rescue ArgumentError
-      raise Errors::InvalidArgumentError.new
+      raise Error.new('invalid argument')
     end
 
     def command_class(command_name)
       MiniVenmo::Commands.const_get(command_name.classify, true)
     rescue NameError
-      raise Errors::CommandNotRecognizedError.new
+      raise Error.new('command not recognized')
     end
   end
 end

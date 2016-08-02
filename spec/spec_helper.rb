@@ -5,7 +5,7 @@ require 'pry'
 
 RSpec.configure do |config|
   config.before do
-    MiniVenmo::Models::User.records = {}
+    MiniVenmo::Store.initialize
   end
 
   config.expect_with :rspec do |expectations|

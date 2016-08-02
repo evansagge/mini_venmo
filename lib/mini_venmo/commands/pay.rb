@@ -19,11 +19,11 @@ module MiniVenmo
       private
 
       def actor
-        @actor ||= MiniVenmo::Models::User.records[actor_name]
+        @actor ||= MiniVenmo::Store.users[actor_name]
       end
 
       def target
-        @target ||= MiniVenmo::Models::User.records[target_name]
+        @target ||= MiniVenmo::Store.users[target_name]
       end
     end
   end

@@ -14,7 +14,7 @@ module MiniVenmo
       private
 
       def user
-        @user ||= MiniVenmo::Models::User.records[name]
+        @user ||= MiniVenmo::Store.users[name]
       end
     end
   end

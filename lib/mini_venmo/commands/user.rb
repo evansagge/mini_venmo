@@ -9,14 +9,14 @@ module MiniVenmo
 
       def run
         validate!
-        MiniVenmo::Models::User.records[name] = MiniVenmo::Models::User.new(name)
+        MiniVenmo::Store.users[name] = MiniVenmo::Models::User.new(name)
       end
 
       private
 
       def validate!
-        raise Errors::InvalidArgumentError unless name =~ /^[\w\d\-]+$/
-        raise Errors::InvalidArgumentError unless (4..15).cover?(name.length)
+        raise Error.new('invalid argument') unless name =~ /^[\w\d\-]+$/
+        raise Error.new('invalid argument') unless (4..15).cover?(name.length)
       end
     end
   end
